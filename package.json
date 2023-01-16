@@ -19,5 +19,9 @@
   "homepage": "https://github.com/Tatoxer/frontend-project-44#readme",
   "bin": {
     "brain-games": "bin/brain-games.js"
+  },
+  "devDependencies": {
+    "npm": "^9.3.0",
+    "readline-sync": "^1.4.10"
   }
 }
