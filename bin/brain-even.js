@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-import readlineSync from 'readline-sync';
 import greeting from './brain-games.js';
-import {checkAndCountCorrectAnswers} from "./brain-games.js";
+import {checkAndCountCorrectAnswers, getRandomNumber, printWinningMessage, getPlayerAnswer} from "./brain-games.js";
 
 const brainEvenGame = () => {
     const name = greeting();
@@ -9,16 +8,14 @@ const brainEvenGame = () => {
 
     let counter = 0;
     while (counter < 3) {
-        const randomNumber = Math.floor(Math.random() * 100);
+        const randomNumber = getRandomNumber();
         const correctResult = randomNumber % 2 === 0 ? 'yes' : 'no';
 
         console.log(`Question: ${randomNumber}\n`);
-        const userResult = readlineSync.question('Your answer: ');
+        const playerResult = getPlayerAnswer();
+        counter = checkAndCountCorrectAnswers(playerResult, correctResult, counter, name);
 
-        counter = checkAndCountCorrectAnswers(userResult, correctResult, counter, name);
-        if (counter === 3) {
-            console.log(`Congratulations, ${name}!`);
-        }
+        printWinningMessage(counter, name);
     }
 };
 

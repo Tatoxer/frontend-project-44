@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-import readlineSync from 'readline-sync';
-import greeting from './brain-games.js';
-import {checkAndCountCorrectAnswers} from "./brain-games.js";
+import greeting, {printWinningMessage} from './brain-games.js';
+import {checkAndCountCorrectAnswers, getRandomNumber, getPlayerAnswer} from "./brain-games.js";
 
 const chooseOperation = () => {
     const expressions = ['+', '-', '*'];
@@ -28,18 +27,16 @@ const brainCalc = () => {
     let counter = 0;
 
     while (counter < 3) {
-        const number1 = Math.floor(Math.random() * 100);
-        const number2 = Math.floor(Math.random() * 10);
+        const number1 = getRandomNumber();
+        const number2 = getRandomNumber(10);
         const operation = chooseOperation();
         const correctResult = applyOperation(number1, number2, operation);
 
         console.log(`Question: ${number1} ${operation} ${number2}`);
-        const playerResult = Number(readlineSync.question('Your answer: '));
+        const playerResult = Number(getPlayerAnswer());
         counter = checkAndCountCorrectAnswers(playerResult, correctResult, counter, name);
 
-        if (counter === 3) {
-            console.log(`Congratulations, ${name}!`);
-        }
+        printWinningMessage(counter, name);
     }
 };
 
