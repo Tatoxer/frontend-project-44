@@ -1,18 +1,7 @@
+#!/usr/bin/env node
 import readlineSync from 'readline-sync';
 import greeting from './brain-games.js';
-
-const checkAndCountCorrectAnswers = (userAnswer, correctAnswer, counter) => {
-    if (userAnswer === correctAnswer) {
-        console.log('Correct!');
-        // eslint-disable-next-line no-param-reassign
-        counter += 1;
-    } else {
-        // eslint-disable-next-line no-param-reassign
-        counter = 4;
-        console.log('Wrong!');
-    }
-    return counter;
-};
+import {checkAndCountCorrectAnswers} from "./brain-games.js";
 
 const brainEvenGame = () => {
     const name = greeting();
@@ -21,12 +10,12 @@ const brainEvenGame = () => {
     let counter = 0;
     while (counter < 3) {
         const randomNumber = Math.floor(Math.random() * 100);
-        const correctAnswer = randomNumber % 2 === 0 ? 'yes' : 'no';
+        const correctResult = randomNumber % 2 === 0 ? 'yes' : 'no';
 
         console.log(`Question: ${randomNumber}\n`);
-        const userAnswer = readlineSync.question('Your answer: ');
+        const userResult = readlineSync.question('Your answer: ');
 
-        counter = checkAndCountCorrectAnswers(userAnswer, correctAnswer, counter);
+        counter = checkAndCountCorrectAnswers(userResult, correctResult, counter, name);
         if (counter === 3) {
             console.log(`Congratulations, ${name}!`);
         }

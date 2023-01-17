@@ -1,8 +1,10 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+#!/usr/bin/env node
 import readlineSync from 'readline-sync';
+import _ from 'lodash';
 
 const askUserName = () => {
-    const name = readlineSync.question('May I have your name?\n');
+    let name = readlineSync.question('May I have your name?\n');
+    name = _.upperFirst(name);
     console.log(`Hello, ${name}!`);
     return name;
 };

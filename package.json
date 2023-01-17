@@ -20,6 +20,7 @@
   "bin": {
     "brain-games": "bin/brain-games.js",
     "brain-even": "bin/brain-even.js",
+    "brain-calc": "bin/brain-calc.js",
     "readline-sync": "^1.4.10"
   },
   "devDependencies": {
@@ -29,6 +30,7 @@
     "npm": "^9.3.0"
   },
   "dependencies": {
+    "lodash": "^4.17.21",
     "readline-sync": "^1.4.10"
   }
 }
