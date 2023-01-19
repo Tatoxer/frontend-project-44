@@ -2,4 +2,6 @@
 
 // если честно, то вообще не понятно существование этого модуля
 
-console.log('Welcome to the Brain Games!');
+const greeting = () => console.log('Welcome to the Brain Games!');
+
+export default greeting;
