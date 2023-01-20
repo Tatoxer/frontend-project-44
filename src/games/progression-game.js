@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import { getRandomNumber, getPlayerAnswer } from '../functions.js';
 
 const getRandomNumberBetweenValues = (min, max) => {
