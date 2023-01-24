@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
 import playGame from './brain-games.js';
-import evenGame from '../src/games/even-game.js';
+import evenGame, { rules } from '../src/games/evenGame.js';
 
-playGame(evenGame);
+playGame(evenGame, rules);

@@ -1,17 +1,12 @@
-import { getRandomNumber, getPlayerAnswer } from '../functions.js';
+import readlineSync from 'readline-sync';
+import getRandomNumber from '../utils.js';
 
-const getRandomNumberBetweenValues = (min, max) => {
-  // eslint-disable-next-line no-param-reassign
-  min = Math.ceil(min);
-  // eslint-disable-next-line no-param-reassign
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min) + min);
-};
+export const rules = 'What number is missing in the progression?';
 
 const makeProgression = () => {
-  const firstElem = getRandomNumber(10);
-  const progressionValue = getRandomNumberBetweenValues(1, 41);
-  const progressionLength = getRandomNumberBetweenValues(5, 11);
+  const firstElem = getRandomNumber(0, 10);
+  const progressionValue = getRandomNumber(1, 41);
+  const progressionLength = getRandomNumber(5, 11);
   const progression = [firstElem];
   let counter = 1;
 
@@ -33,14 +28,13 @@ const makeEncryptedProgression = (progression, elem) => {
 };
 
 const brainProgression = () => {
-  console.log('What number is missing in the progression?');
   const progression = makeProgression();
-  const indexOfEncryption = getRandomNumberBetweenValues(0, progression.length);
+  const indexOfEncryption = getRandomNumber(0, progression.length);
   const encryptedProgression = makeEncryptedProgression(progression, indexOfEncryption);
   const correctResult = progression[indexOfEncryption];
 
   console.log(`Question: ${encryptedProgression.join(' ')}`);
-  const playerResult = Number(getPlayerAnswer());
+  const playerResult = Number(readlineSync.question('Your answer: '));
 
   return [playerResult, correctResult];
 };
