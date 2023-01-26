@@ -1,32 +1,33 @@
 #!/usr/bin/env node
 
+import readlineSync from 'readline-sync';
 import askUserName from '../src/cli.js';
 
 console.log('Welcome to the Brain Games!');
 const name = askUserName();
 
-const playGame = (game, rules) => {
-  let totalResult = 'win';
-  const maxRounds = 3;
-  console.log(rules);
+const playGame = (game, description) => {
+  const roundsCount = 3;
+  let round;
+  console.log(description);
 
-  for (let round = 0; round < maxRounds; round += 1) {
-    const gameData = game();
-    const [playerResult, correctResult] = [gameData[0], gameData[1]];
+  for (round = 0; round < roundsCount; round += 1) {
+    // Оставил переменную для лучшей читаемости
+    const getGameData = game();
+    const [correctResult, question] = getGameData;
+    console.log(question);
+    const playerResult = readlineSync.question('Your answer: ').toString();
 
-    if (playerResult === correctResult) {
-      console.log('Correct!\n');
-    } else {
+    if (playerResult !== correctResult) {
       console.log(`Wrong!, correct answer is '${correctResult}'`);
       console.log(`Let's try again, ${name}!`);
-      totalResult = 'loose';
       break;
     }
+    console.log('Correct!\n');
   }
-  if (totalResult === 'loose') {
-    return;
+  if (round === 3) {
+    console.log(`Congratulations, ${name}!`);
   }
-  console.log(`Congratulations, ${name}!`);
 };
 
 export default playGame;

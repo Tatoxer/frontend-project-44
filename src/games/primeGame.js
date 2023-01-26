@@ -1,7 +1,6 @@
-import readlineSync from 'readline-sync';
 import getRandomNumber from '../utils.js';
 
-export const rules = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+export const description = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
 const isPrime = (number) => {
   let counter = 0;
@@ -13,16 +12,13 @@ const isPrime = (number) => {
   return counter === 0;
 };
 
-const brainPrime = () => {
+const generatePrimeData = () => {
   const number = getRandomNumber(1, 500);
-  console.log(`Question: ${number}`);
+  const question = `Question: ${number}`;
 
-  let correctResult;
-  // eslint-disable-next-line no-unused-expressions
-  isPrime(number) ? correctResult = 'yes' : correctResult = 'no';
-  const playerResult = readlineSync.question('Your answer: ');
+  const correctResult = isPrime(number) ? 'yes' : 'no';
 
-  return [playerResult, correctResult];
+  return [correctResult, question];
 };
 
-export default brainPrime;
+export default generatePrimeData;

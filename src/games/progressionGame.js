@@ -1,42 +1,31 @@
-import readlineSync from 'readline-sync';
 import getRandomNumber from '../utils.js';
 
-export const rules = 'What number is missing in the progression?';
+export const description = 'What number is missing in the progression?';
 
-const makeProgression = () => {
-  const firstElem = getRandomNumber(0, 10);
-  const progressionValue = getRandomNumber(1, 41);
-  const progressionLength = getRandomNumber(5, 11);
+const makeProgression = (firstElem, value, length) => {
   const progression = [firstElem];
   let counter = 1;
 
-  while (counter <= progressionLength) {
-    progression[counter] = progression[counter - 1] + progressionValue;
+  while (counter <= length) {
+    progression[counter] = progression[counter - 1] + value;
     counter += 1;
   }
   return progression;
 };
 
-const makeEncryptedProgression = (progression, elem) => {
-  const encryptedProgression = [];
-  // eslint-disable-next-line no-restricted-syntax
-  for (const i of progression) {
-    encryptedProgression.push(i);
-  }
-  encryptedProgression[elem] = '..';
-  return encryptedProgression;
-};
+const generateProgressionData = () => {
+  const firstElemOfProgression = getRandomNumber(0, 10);
+  const progressionValue = getRandomNumber(1, 41);
+  const progressionLength = getRandomNumber(5, 11);
 
-const brainProgression = () => {
-  const progression = makeProgression();
+  const progression = makeProgression(firstElemOfProgression, progressionValue, progressionLength);
   const indexOfEncryption = getRandomNumber(0, progression.length);
-  const encryptedProgression = makeEncryptedProgression(progression, indexOfEncryption);
-  const correctResult = progression[indexOfEncryption];
+  const correctResult = progression[indexOfEncryption].toString();
 
-  console.log(`Question: ${encryptedProgression.join(' ')}`);
-  const playerResult = Number(readlineSync.question('Your answer: '));
+  progression[indexOfEncryption] = '..';
+  const question = `Question: ${progression.join(' ')}`;
 
-  return [playerResult, correctResult];
+  return [correctResult, question];
 };
 
-export default brainProgression;
+export default generateProgressionData;
