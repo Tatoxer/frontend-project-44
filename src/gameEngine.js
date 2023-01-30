@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import readlineSync from 'readline-sync';
-import askUserName from '../cli.js';
+import askUserName from './cli.js';
 
 console.log('Welcome to the Brain Games!');
 const name = askUserName();

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import playGame from '../src/games/gameEngine.js';
-import primeGame, { description } from '../src/games/primeGame.js';
+import playGame from '../src/gameEngine.js';
+import primeGame, { description } from '../src/games/prime.js';
 
 playGame(primeGame, description);
