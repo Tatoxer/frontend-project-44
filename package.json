@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/Tatoxer/frontend-project-44#readme",
   "bin": {
-    "brain-games": "src/brain-games.js",
+    "brain-games": "bin/brain-games.js",
     "brain-even": "bin/brain-even.js",
     "brain-calc": "bin/brain-calc.js",
     "brain-gcd": "bin/brain-gcd.js",
