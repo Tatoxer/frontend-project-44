@@ -1,14 +1,15 @@
 import readlineSync from 'readline-sync';
 import _ from 'lodash';
 
-const askUserName = () => {
-  let name = readlineSync.question('May I have your name?\n');
-  if (name.length === 0) {
-    name = 'noname';
+const askUserName = () => readlineSync.question('May I have your name?\n');
+export const correctUserName = (name) => {
+  let correctedName = _.upperFirst(name);
+  if (correctedName.length === 0) {
+    correctedName = 'Noname';
   }
-  name = _.upperFirst(name);
-  console.log(`Hello, ${name}!`);
-  return name;
+  return correctedName;
 };
-
-export default askUserName;
+export const greetUser = () => {
+  console.log('Welcome to the Brain Games!');
+  console.log(`Hello, ${correctUserName(askUserName())}!`);
+};

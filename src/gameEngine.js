@@ -1,33 +1,30 @@
-#!/usr/bin/env node
-
 import readlineSync from 'readline-sync';
-import askUserName from './cli.js';
+import { correctUserName } from './cli.js';
 
-console.log('Welcome to the Brain Games!');
-const name = askUserName();
+const playGame = (getGameData, description) => {
+  console.log('Welcome to the Brain Games!');
 
-const playGame = (game, description) => {
+  let name = readlineSync.question('May I have your name?\n');
+  name = correctUserName(name);
+  console.log(`Hello, ${name}!`);
+
   const roundsCount = 3;
   let round;
   console.log(description);
 
   for (round = 0; round < roundsCount; round += 1) {
-    // Оставил переменную для лучшей читаемости
-    const getGameData = game();
-    const [correctResult, question] = getGameData;
+    const [correctResult, question] = getGameData();
     console.log(question);
     const playerResult = readlineSync.question('Your answer: ').toString();
 
     if (playerResult !== correctResult) {
       console.log(`Wrong!, correct answer is '${correctResult}'`);
       console.log(`Let's try again, ${name}!`);
-      break;
+      return;
     }
-    console.log('Correct!\n');
+    console.log('Correct!');
   }
-  if (round === 3) {
-    console.log(`Congratulations, ${name}!`);
-  }
+  console.log(`Congratulations, ${name}!`);
 };
 
 export default playGame;
